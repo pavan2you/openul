@@ -1,4 +1,4 @@
-package io.openul
+package io.soul
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

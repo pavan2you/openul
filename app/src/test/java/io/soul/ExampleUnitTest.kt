@@ -1,4 +1,4 @@
-package io.openul
+package io.soul
 
 import org.junit.Test
 

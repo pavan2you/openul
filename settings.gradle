@@ -1,2 +1,4 @@
 rootProject.name = "openul"
 include ':app'
+include ':soul'
+include ':implementations:soul-java'
