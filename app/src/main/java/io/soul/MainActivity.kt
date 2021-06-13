@@ -15,6 +15,6 @@ class MainActivity : AppCompatActivity() {
         val list = openUl.newList<SampleObject>()
     }
 
-    class SampleObject : SoulObject<SampleObject>(), Object {
+    class SampleObject : SoulObject<SampleObject>() {
     }
 }
