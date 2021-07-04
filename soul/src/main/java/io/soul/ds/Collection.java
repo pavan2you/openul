@@ -1,8 +1,6 @@
 package io.soul.ds;
 
-import io.soul.Object;
-
-public interface Collection<T extends Object> extends DataStructure<T>, Iterable<T> {
+public interface Collection<T> extends DataStructure<T>, Iterable<T> {
 
     boolean contains(T element);
 

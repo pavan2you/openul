@@ -1,31 +1,25 @@
-package io.soul.java;
+package io.soul;
 
-import io.soul.Object;
 import io.soul.concurrency.ThreadSignalingException;
 import io.soul.datatype.String;
-import io.soul.java.concurrency.SoulThreadSignalingException;
-import io.soul.java.datatype.SoulString;
-import io.soul.java.reflect.SoulClass;
 import io.soul.memory.Initializable;
 import io.soul.reflect.Klass;
 
-public class SoulObject<T> implements Object {
+public class SoulObject implements Object {
 
-    protected Klass<SoulObject<T>> klass;
-    public T actual;
+    public java.lang.Object actual;
 
     public SoulObject() {
         this(null);
     }
 
-    public SoulObject(T actual) {
+    public SoulObject(java.lang.Object actual) {
         this.actual = actual;
         init();
     }
 
     @Override
     public Initializable init() {
-        klass = new SoulClass<>((Class<SoulObject<T>>) this.getClass());
         return this;
     }
 
@@ -34,7 +28,7 @@ public class SoulObject<T> implements Object {
         try {
             wait();
         } catch (InterruptedException e) {
-            throw new SoulThreadSignalingException(e);
+            throw new ThreadSignalingException(e);
         }
     }
 
@@ -43,7 +37,7 @@ public class SoulObject<T> implements Object {
         try {
             wait(millis);
         } catch (InterruptedException e) {
-            throw new SoulThreadSignalingException(e);
+            throw new ThreadSignalingException(e);
         }
     }
 
@@ -58,14 +52,7 @@ public class SoulObject<T> implements Object {
     }
 
     @Override
-    public boolean equals(java.lang.Object obj) {
-        SoulObject<java.lang.Object> other = new SoulObject<>();
-        other.actual = obj;
-        return equalsTo(other);
-    }
-
-    @Override
-    public boolean equalsTo(Object other) {
+    public boolean equals(java.lang.Object other) {
         if (other == null) {
             return false;
         }
@@ -73,7 +60,17 @@ public class SoulObject<T> implements Object {
             return false;
         }
 
-        return this.actual == ((SoulObject<T>) other).actual;
+        return equalsTo((SoulObject) other);
+    }
+
+    @Override
+    public boolean equalsTo(Object other) {
+        return this == other || this.actual == ((SoulObject) other).actual;
+    }
+
+    @Override
+    public int hashCode() {
+        return hashValue();
     }
 
     @Override
@@ -82,23 +79,22 @@ public class SoulObject<T> implements Object {
     }
 
     @Override
+    public String stringify() {
+        return Soul.asString(toString());
+    }
+
+    @Override
     public Klass<? extends Object> getKlass() {
-        return klass;
+        return Soul.klassOf(this);
     }
 
     @Override
     public boolean instanceOf(Klass<?> klass) {
-        return this.klass.equalsTo(klass);
-    }
-
-    @Override
-    public String stringify() {
-        return new SoulString(toString());
+        return getKlass().equalsTo(klass);
     }
 
     @Override
     public void release() {
         actual = null;
-        klass = null;
     }
 }

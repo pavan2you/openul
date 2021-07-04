@@ -1,13 +1,12 @@
 package io.soul;
 
-import io.soul.ds.Array;
-import io.soul.ds.List;
+import io.soul.reflect.KlassLoader;
 
 public interface Language extends Object {
 
-    Object newObject();
+    KlassLoader klassLoader();
 
-    <T> Array<T> newArray();
+    Primitives primitives();
 
-    <T extends Object> List<T> newList();
+    DataStructures dataStructures();
 }

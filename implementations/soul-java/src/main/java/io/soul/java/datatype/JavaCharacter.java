@@ -4,11 +4,11 @@ import io.soul.codec.Streamable;
 import io.soul.datatype.Character;
 import io.soul.io.InputStream;
 import io.soul.io.OutputStream;
-import io.soul.java.SoulObject;
+import io.soul.SoulObject;
 
-public class SoulCharacter extends SoulObject<java.lang.Character> implements Character {
+public class JavaCharacter extends SoulObject implements Character {
 
-    public SoulCharacter(char ch) {
+    public JavaCharacter(char ch) {
     }
 
     @Override

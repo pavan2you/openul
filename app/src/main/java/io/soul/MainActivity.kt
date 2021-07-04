@@ -1,20 +1,20 @@
 package io.soul
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import io.soul.java.SoulObject
+import androidx.appcompat.app.AppCompatActivity
+import io.soul.java.JavaLanguage
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val openUl = Soul.language()
-        val obj = openUl.newObject()
-        val array = openUl.newArray<Int>()
-        val list = openUl.newList<SampleObject>()
+        Soul.set(JavaLanguage())
+        val obj =  SampleObject()
+        val array = Soul.newArray<Int>()
+        val list = Soul.newList<SampleObject>()
     }
 
-    class SampleObject : SoulObject<SampleObject>() {
-    }
+    class SampleObject : SoulObject()
 }

@@ -8,27 +8,33 @@ import io.soul.datatype.String;
 import io.soul.ds.Sequence;
 import io.soul.io.InputStream;
 import io.soul.io.OutputStream;
-import io.soul.java.SoulObject;
+import io.soul.SoulObject;
 
-public class SoulString extends SoulObject<java.lang.String> implements String, Serializable {
+public class JavaString extends SoulObject implements String, Serializable {
 
-    public SoulString(java.lang.String string) {
-        super(string);
+    private final java.lang.String actual;
+
+    public JavaString() {
+        this("");
+    }
+
+    public JavaString(java.lang.String actual) {
+        this.actual = actual;
     }
 
     @Override
     public int compareTo(String other) {
-        return actual.compareTo(((SoulString) other).actual);
+        return actual.compareTo(((JavaString) other).actual);
     }
 
     @Override
     public String copy() {
-        return new SoulString(actual);
+        return new JavaString(actual);
     }
 
     @Override
     public Character elementAt(int index) {
-        return new SoulCharacter(actual.charAt(index));
+        return new JavaCharacter(actual.charAt(index));
     }
 
     @Override
@@ -48,7 +54,7 @@ public class SoulString extends SoulObject<java.lang.String> implements String, 
 
     @Override
     public Sequence<Character> subsequence(int from, int to) {
-        return new SoulString(actual.substring(from, to));
+        return new JavaString(actual.substring(from, to));
     }
 
     @Override

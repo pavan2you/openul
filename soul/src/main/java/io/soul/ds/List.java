@@ -1,6 +1,6 @@
 package io.soul.ds;
 
-import io.soul.Object;
+public interface List<T> extends Collection<T> {
 
-public interface List<T extends Object> extends Collection<T> {
+    void add(T element);
 }
